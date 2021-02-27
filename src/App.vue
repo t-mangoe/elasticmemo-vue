@@ -1,9 +1,11 @@
 <template>
-  <div id="app">
-    <CardArea @pre-loader="PreLoaderShow = $event"></CardArea>
-    <CreateMemoButton></CreateMemoButton>
-    <PreLoader :show="PreLoaderShow"></PreLoader>
-  </div>
+  <v-app>
+    <div id="app">
+      <CardArea @pre-loader="PreLoaderShow = $event"></CardArea>
+      <CreateMemoButton></CreateMemoButton>
+      <PreLoader :show="PreLoaderShow"></PreLoader>
+    </div>
+  </v-app>
 </template>
 
 <script>
