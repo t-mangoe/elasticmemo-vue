@@ -21,7 +21,7 @@ export default {
   name: "CardArea",
   data() {
     return {
-      datas: ["aaa", "bbb"],
+      datas: [],
       memos: [],
     };
   },

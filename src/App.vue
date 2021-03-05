@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <div id="app">
+      <Header></Header>
       <CardArea @pre-loader="PreLoaderShow = $event"></CardArea>
       <CreateMemoButton></CreateMemoButton>
       <PreLoader :show="PreLoaderShow"></PreLoader>
@@ -13,6 +14,8 @@
 import CardArea from "./components/CardArea.vue";
 import PreLoader from "./components/PreLoader.vue";
 import CreateMemoButton from "./components/CreateMemoButton.vue";
+import Header from "./components/Header.vue";
+
 export default {
   name: "App",
 
@@ -21,6 +24,7 @@ export default {
     PreLoader,
     CardArea,
     CreateMemoButton,
+    Header,
   },
 
   data: () => ({
