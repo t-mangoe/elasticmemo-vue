@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <!-- Google icon font -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
   <!-- Materialize CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
   <title>
     <%= htmlWebpackPlugin.options.title %>
   </title>
@@ -22,72 +22,11 @@
     <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
         Please enable it to continue.</strong>
   </noscript>
-  <!-- <nav>
-    <div class="nav-wrapper">
-      Elasticsearchを使ったメモアプリ
-    </div>
-  </nav> -->
 
-  <!-- <div id="card-area"></div> -->
   <div id="app"></div>
-
-
-  <!-- Modal Trigger -->
-  <!-- <a id="new-memo" class="waves-effect waves-light btn modal-trigger" href="#modal1">新規作成</a> -->
-
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>メモを入力</h4>
-      <!-- <p>A bunch of text</p> -->
-
-      <div class="row">
-        <div class="input-field">
-          <label for="memo-title">タイトル</label>
-          <input type="text" id="memo-title" class="validate">
-        </div>
-        <div class="input-field">
-          <textarea id="memo-text" rows="20" class="memo-textarea"></textarea>
-          <!-- <textarea id="note" class="materialize-textarea" rows="10"></textarea> -->
-        </div>
-      </div>
-
-    </div>
-    <div class="modal-footer">
-      <a id="memo-submit-link" href="" class="modal-close waves-effect waves-green btn">作成</a>
-    </div>
-  </div>
-
-  <div id="modal2" class="modal">
-    <div class="modal-content">
-      <h4>メモを入力</h4>
-      <!-- <p>A bunch of text</p> -->
-
-      <div class="row">
-        <div class="input-field">
-          <label for="memo-title">タイトル</label>
-          <input type="text" id="edit-memo-title" class="validate">
-        </div>
-        <div class="input-field">
-          <textarea id="edit-memo-text" rows="20" class="memo-textarea"></textarea>
-          <!-- <textarea id="note" class="materialize-textarea" rows="10"></textarea> -->
-        </div>
-        <input type="hidden" id="edited-id">
-      </div>
-
-    </div>
-    <div class="modal-footer">
-      <a id="edit-submit-link" href="" class="modal-close waves-effect waves-green btn">編集</a>
-      <a id="delete-link" href="" class="modal-close waves-effect waves-light red btn">削除</a>
-    </div>
-
-  </div>
 
   <!-- built files will be auto injected -->
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-    crossorigin="anonymous"></script>
 </body>
 
 </html>
