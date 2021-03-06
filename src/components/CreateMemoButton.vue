@@ -1,16 +1,6 @@
 <template>
-  <!-- <a
-    id="new-memo"
-    class="waves-effect waves-light btn modal-trigger"
-    href="#modal1"
-    v-on:click.prevent="clicked"
-    >新規作成</a
-  > -->
-  <!-- <v-app id="button"> -->
-  <v-row>
-    <v-btn color="primary" dark @click.stop="dialog = true">
-      Open Dialog
-    </v-btn>
+  <v-container>
+    <v-btn color="primary" dark @click.stop="dialog = true"> Create </v-btn>
 
     <v-dialog v-model="dialog" max-width="75%">
       <v-card>
@@ -21,7 +11,6 @@
               <v-text-field label="タイトル" v-model="titleText"></v-text-field>
             </v-col>
             <v-col cols="12">
-              <!-- marerializeのCSSと競合しているので、rowsはうまく反映されない -->
               <v-textarea
                 label="内容"
                 value=""
@@ -43,8 +32,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-row>
-  <!-- </v-app> -->
+  </v-container>
 </template>
 
 <script>
