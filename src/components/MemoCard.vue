@@ -1,16 +1,10 @@
 <template>
-  <div class="row">
-    <div class="col s12 m6">
-      <div class="card blue-grey lighten-5">
-        <div class="card-content blue-grey-text text-darken-4">
-          <span class="card-title">{{ title }}</span>
-          <p>
-            {{ message }}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-container>
+    <v-card class="mx-auto" outlined>
+      <v-card-title class="headline">{{ title }}</v-card-title>
+      <v-card-text>{{ message }}</v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
