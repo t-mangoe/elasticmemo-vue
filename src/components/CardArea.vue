@@ -2,6 +2,7 @@
   <div id="card-area">
     <MemoCard
       v-for="(memo, key) in memos"
+      :id="memo.id"
       :key="key"
       :title="memo.title"
       :message="memo.message"
@@ -55,6 +56,7 @@ export default {
           const result = [];
           for (const elem of hitsArray) {
             const tmp = {};
+            tmp.id = elem._id;
             tmp.title = elem._source.title;
             tmp.message = elem._source.message;
             result.push(tmp);

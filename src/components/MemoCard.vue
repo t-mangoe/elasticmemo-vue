@@ -27,10 +27,10 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" text @click="dialog = false">
-            Cancel
-          </v-btn>
-          <v-btn color="green darken-1" text @click="dialog = false">
             Update
+          </v-btn>
+          <v-btn color="green darken-1" text @click="deleteMemo">
+            Delete
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -39,9 +39,34 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "MemoCard",
+  methods: {
+    deleteMemo() {
+      console.log("delete memo.");
+      const url =
+        "http://192.168.11.50:9200/my_index/my_type/" + this.id + "?pretty";
+
+      axios
+        .delete(url)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.error("通信失敗！！");
+          console.error(error);
+        });
+
+      this.dialog = false;
+    },
+  },
   props: {
+    id: {
+      type: String,
+      default: "",
+    },
     title: {
       type: String,
       default: "タイトルなし",
