@@ -26,7 +26,7 @@
           <v-btn color="green darken-1" text @click="dialog = false">
             Cancel
           </v-btn>
-          <v-btn color="green darken-1" text @click="dialog = false">
+          <v-btn color="green darken-1" text @click="createMemo">
             Create
           </v-btn>
         </v-card-actions>
@@ -36,11 +36,39 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "CreateMemoButton",
   methods: {
     clicked() {
       console.log("クリックされました！！！");
+    },
+    createMemo() {
+      console.log("メモを作成します");
+      console.log(this.titleText);
+      console.log(this.contentsText);
+      const date = new Date();
+      const dateStr = date.toISOString();
+
+      axios
+        .post("http://192.168.11.50:9200/my_index/my_type/?pretty", {
+          user_name: "user",
+          date: dateStr,
+          title: this.titleText,
+          message: this.contentsText,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.error("通信失敗！！");
+          console.error(error);
+        });
+
+      this.titleText = "";
+      this.contentsText = "";
+      this.dialog = false;
     },
   },
   data() {
