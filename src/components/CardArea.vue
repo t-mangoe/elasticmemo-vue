@@ -40,7 +40,7 @@ export default {
     getMemos() {
       console.log(this);
       axios
-        .post("http://localhost:9200/my_index/_search", {
+        .post("http://192.168.11.50:9200/my_index/_search", {
           sort: [
             {
               date: "desc",
