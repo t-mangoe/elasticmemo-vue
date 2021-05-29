@@ -1,0 +1,33 @@
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+  vue:
+    build:
+      context: "."
+      dockerfile: "vue.dockerfile"
+    command: "yarn run serve"
+    ports:
+      - '8080:8080'
+    volumes:
+      - .:/app
+  es:
+    build:
+      context: "."
+      dockerfile: "elasticsearch.dockerfile"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
