@@ -1,0 +1,8 @@
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+# CORSの有効化
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+# 外部からのアクセスの有効化
+http.port: 9200
+transport.host: localhost
