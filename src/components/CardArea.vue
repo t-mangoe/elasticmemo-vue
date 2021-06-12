@@ -39,6 +39,7 @@ export default {
       this.$emit("pre-loader", flag);
     },
     getMemos() {
+      const _this = this;
       console.log(this);
       axios
         .post("http://192.168.11.50:9200/my_index/_search", {
@@ -61,18 +62,20 @@ export default {
             tmp.message = elem._source.message;
             result.push(tmp);
           }
-          this.memos = result;
-          this.showPreLoader(false);
+          // メモを一旦全削除
+          _this.memos.splice(0, _this.memos.length);
+          // 再度入れ直す
+          _this.memos.push(...result);
+          _this.showPreLoader(false);
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.error("通信失敗！！");
           console.error(error);
         });
     },
-    window: (onload = function () {}),
+    window: (onload = function() {}),
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

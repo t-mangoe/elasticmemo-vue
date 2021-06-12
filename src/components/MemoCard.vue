@@ -1,8 +1,10 @@
 <template>
   <v-container>
     <v-card class="mx-auto" outlined @click.stop="dialog = true">
-      <v-card-title class="headline">{{ editingTitle }}</v-card-title>
-      <v-card-text>{{ editingMessage }}</v-card-text>
+      <!-- <v-card-title class="headline">{{ editingTitle }}</v-card-title> -->
+      <v-card-title class="headline">{{ title }}</v-card-title>
+      <!-- <v-card-text>{{ editingMessage }}</v-card-text> -->
+      <v-card-text>{{ message }}</v-card-text>
     </v-card>
 
     <v-dialog v-model="dialog" max-width="75%">
@@ -11,17 +13,14 @@
         <v-container>
           <v-row>
             <v-col cols="12">
-              <v-text-field
-                label="タイトル"
-                v-model="editingTitle"
-              ></v-text-field>
+              <v-text-field label="タイトル" v-model="title"></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-textarea
                 label="内容"
                 value=""
                 rows="10"
-                v-model="editingMessage"
+                v-model="message"
               ></v-textarea>
             </v-col>
           </v-row>
@@ -57,7 +56,7 @@ export default {
         .then((response) => {
           console.log(response);
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.error("通信失敗！！");
           console.error(error);
         });
@@ -106,12 +105,11 @@ export default {
   data() {
     return {
       dialog: false,
-      editingTitle: this.title,
-      editingMessage: this.message,
+      // editingTitle: this.title,
+      // editingMessage: this.message,
     };
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

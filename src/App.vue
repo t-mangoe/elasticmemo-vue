@@ -2,8 +2,8 @@
   <v-app>
     <div id="app">
       <Header></Header>
-      <CardArea @pre-loader="PreLoaderShow = $event"></CardArea>
-      <CreateMemoButton></CreateMemoButton>
+      <CardArea @pre-loader="PreLoaderShow = $event" ref="cardArea"></CardArea>
+      <CreateMemoButton @update-event="update"></CreateMemoButton>
       <PreLoader :show="PreLoaderShow"></PreLoader>
     </div>
   </v-app>
@@ -25,6 +25,12 @@ export default {
     CardArea,
     CreateMemoButton,
     Header,
+  },
+
+  methods: {
+    update() {
+      this.$refs.cardArea.getMemos();
+    },
   },
 
   data: () => ({

@@ -60,8 +60,9 @@ export default {
         })
         .then((response) => {
           console.log(response);
+          this.$emit("update-event");
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.error("通信失敗！！");
           console.error(error);
         });
@@ -81,5 +82,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
