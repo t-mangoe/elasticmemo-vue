@@ -4,7 +4,7 @@
       <!-- <v-card-title class="headline">{{ editingTitle }}</v-card-title> -->
       <v-card-title class="headline">{{ title }}</v-card-title>
       <!-- <v-card-text>{{ editingMessage }}</v-card-text> -->
-      <v-card-text>{{ message }}</v-card-text>
+      <v-card-text class="card-text">{{ message }}</v-card-text>
     </v-card>
 
     <v-dialog v-model="dialog" max-width="75%">
@@ -112,4 +112,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.card-text {
+  white-space: pre-line;
+}
+</style>
