@@ -10,7 +10,13 @@
       <v-icon>mdi-heart</v-icon>
     </v-btn>
 
-    <v-btn icon>
+    <v-text-field
+      hide-details
+      single-line
+      v-model="searchWord"
+      color="black"
+    ></v-text-field>
+    <v-btn icon @click="search">
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
   </v-app-bar>
@@ -19,8 +25,18 @@
 <script>
 export default {
   name: "Header",
+  data() {
+    return {
+      searchWord: "",
+    };
+  },
+  methods: {
+    search() {
+      // alert(this.searchWord);
+      this.$emit("search-event", this.searchWord);
+    },
+  },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

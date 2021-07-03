@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <div id="app">
-      <Header></Header>
+      <Header @search-event="search"></Header>
       <CardArea @pre-loader="PreLoaderShow = $event" ref="cardArea"></CardArea>
       <CreateMemoButton @update-event="update"></CreateMemoButton>
       <PreLoader :show="PreLoaderShow"></PreLoader>
@@ -30,6 +30,9 @@ export default {
   methods: {
     update() {
       this.$refs.cardArea.getMemos();
+    },
+    search(searchWord) {
+      this.$refs.cardArea.search(searchWord);
     },
   },
 
