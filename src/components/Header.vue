@@ -1,6 +1,6 @@
 <template>
   <v-app-bar color="pink lighten-2">
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="openSideNav"></v-app-bar-nav-icon>
 
     <v-toolbar-title>Elasticsearchを使ったメモアプリ</v-toolbar-title>
 
@@ -34,6 +34,9 @@ export default {
     search() {
       // alert(this.searchWord);
       this.$emit("search-event", this.searchWord);
+    },
+    openSideNav() {
+      this.$emit("open-navigation-drawer-event");
     },
   },
 };
