@@ -5,6 +5,9 @@
       <v-card-title class="headline">{{ title }}</v-card-title>
       <!-- <v-card-text>{{ editingMessage }}</v-card-text> -->
       <v-card-text class="card-text">{{ message }}</v-card-text>
+      <v-card-text>
+        <v-chip v-for="tag in tags" :key="tag">{{ tag }}</v-chip>
+      </v-card-text>
     </v-card>
 
     <v-dialog v-model="dialog" max-width="75%">
@@ -100,6 +103,10 @@ export default {
     message: {
       type: String,
       default: "",
+    },
+    tags: {
+      type: Array,
+      default: () => [],
     },
   },
   data() {
