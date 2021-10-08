@@ -6,6 +6,7 @@
       :key="key"
       :title="memo.title"
       :message="memo.message"
+      :tags="memo.tags"
     ></MemoCard>
     <ul v-for="(d, key) in datas" :key="key">
       <li>{{ d }}</li>
@@ -39,7 +40,6 @@ export default {
   mounted() {
     console.log("CardAreaを表示します");
     // alert("データ追加！！！");
-    // this.datas.push("cccc");
     this.showPreLoader(true);
 
     this.getMemos();
@@ -70,6 +70,7 @@ export default {
             tmp.id = elem._id;
             tmp.title = elem._source.title;
             tmp.message = elem._source.message;
+            tmp.tags = elem._source.tags;
             result.push(tmp);
           }
           // メモを一旦全削除
@@ -89,7 +90,6 @@ export default {
       this.showPreLoader(true);
       // 検索処理
       axios
-        // .post("http://192.168.11.50:9200/my_index/_search", {
         .post("/es/my_index/_search", {
           query: {
             match: {
