@@ -19,6 +19,16 @@
               ></v-textarea>
             </v-col>
           </v-row>
+          <v-row>
+            <v-select
+              v-model="tags"
+              :items="items"
+              chips
+              label="Tags"
+              multiple
+              solo
+            ></v-select>
+          </v-row>
         </v-container>
 
         <v-card-actions>
@@ -77,6 +87,8 @@ export default {
       dialog: false,
       titleText: "",
       contentsText: "",
+      tags: [],
+      items: ["foo", "bar", "fizz", "buzz"],
     };
   },
 };
