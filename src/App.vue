@@ -1,7 +1,11 @@
 <template>
   <v-app>
     <div id="app">
-      <Header @search-event="search"></Header>
+      <Header
+        @search-event="search"
+        @open-navigation-drawer-event="openNavigationDrawer"
+      ></Header>
+      <NavigationDrawer ref="navigationDrawer"></NavigationDrawer>
       <CardArea @pre-loader="PreLoaderShow = $event" ref="cardArea"></CardArea>
       <CreateMemoButton @update-event="update"></CreateMemoButton>
       <PreLoader :show="PreLoaderShow"></PreLoader>
@@ -15,6 +19,7 @@ import CardArea from "./components/CardArea.vue";
 import PreLoader from "./components/PreLoader.vue";
 import CreateMemoButton from "./components/CreateMemoButton.vue";
 import Header from "./components/Header.vue";
+import NavigationDrawer from "./components/NavigationDrawer.vue";
 
 export default {
   name: "App",
@@ -25,6 +30,7 @@ export default {
     CardArea,
     CreateMemoButton,
     Header,
+    NavigationDrawer,
   },
 
   methods: {
@@ -33,6 +39,9 @@ export default {
     },
     search(searchWord) {
       this.$refs.cardArea.search(searchWord);
+    },
+    openNavigationDrawer() {
+      this.$refs.navigationDrawer.open();
     },
   },
 
