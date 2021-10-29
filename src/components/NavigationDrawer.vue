@@ -8,7 +8,11 @@
           </v-list-item-content>
         </template>
 
-        <v-list-item v-for="tag in tags" :key="tag">
+        <v-list-item
+          v-for="tag in tags"
+          :key="tag"
+          @click="narrowTag(tag, $event)"
+        >
           <v-list-item-content>
             <v-list-item-title>{{ tag }}</v-list-item-title>
           </v-list-item-content>
@@ -104,6 +108,12 @@ export default {
         });
       this.newTagText = "";
       this.dialog = false;
+    },
+    narrowTag(tag, event) {
+      console.log(event);
+      confirm("narrow tag: " + tag);
+      // 検索と同様に処理する。App.vue経由でCardArea.vueに処理を移す
+      // this.$emit("tag-narrow-event", tag);
     },
   },
 };
