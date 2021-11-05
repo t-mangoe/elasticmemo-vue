@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card class="mx-auto" outlined @click.stop="dialog = true">
+    <v-card class="mx-auto" outlined @click.stop="openEditWindow">
       <!-- <v-card-title class="headline">{{ editingTitle }}</v-card-title> -->
       <v-card-title class="headline">{{ title }}</v-card-title>
       <!-- <v-card-text>{{ editingMessage }}</v-card-text> -->
@@ -26,6 +26,16 @@
                 v-model="message"
               ></v-textarea>
             </v-col>
+          </v-row>
+          <v-row>
+            <v-select
+              v-model="editingTags"
+              :items="items"
+              chips
+              label="Tags"
+              multiple
+              solo
+            ></v-select>
           </v-row>
         </v-container>
 
@@ -90,6 +100,12 @@ export default {
         });
       this.dialog = false;
     },
+    openEditWindow() {
+      const tagAdmin = this.$tagAdmin;
+      this.items = tagAdmin.getAllTags();
+      this.editingTags = this.tags;
+      this.dialog = true;
+    },
   },
   props: {
     id: {
@@ -112,6 +128,8 @@ export default {
   data() {
     return {
       dialog: false,
+      items: ["foo", "bar", "fizz", "buzz"],
+      editingTags: [],
       // editingTitle: this.title,
       // editingMessage: this.message,
     };
