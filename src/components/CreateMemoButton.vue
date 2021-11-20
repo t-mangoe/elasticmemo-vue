@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <v-btn color="primary" dark @click.stop="dialog = true"> Create </v-btn>
+    <v-btn color="primary" dark @click.stop="openCreateMemoWindow">
+      Create
+    </v-btn>
 
     <v-dialog v-model="dialog" max-width="75%">
       <v-card>
@@ -67,6 +69,7 @@ export default {
           date: dateStr,
           title: this.titleText,
           message: this.contentsText,
+          tags: this.tags,
         })
         .then((response) => {
           console.log(response);
@@ -80,6 +83,11 @@ export default {
       this.titleText = "";
       this.contentsText = "";
       this.dialog = false;
+    },
+    openCreateMemoWindow() {
+      const tagAdmin = this.$tagAdmin;
+      this.items = tagAdmin.getAllTags();
+      this.dialog = true;
     },
   },
   data() {
