@@ -39,7 +39,6 @@ export default {
   },
   mounted() {
     console.log("CardAreaを表示します");
-    // alert("データ追加！！！");
     this.showPreLoader(true);
 
     this.getMemos();
@@ -85,18 +84,20 @@ export default {
           _this.showPreLoader(false);
         });
     },
-    search(searchWord) {
+    search({ searchWord = "", tagName = "" } = {}) {
       const _this = this;
       this.showPreLoader(true);
+      const match = {};
+      if (searchWord !== "") match.message = searchWord;
+      if (tagName !== "") match.tags = tagName;
+      const option = {
+        query: {
+          match,
+        },
+      };
       // 検索処理
       axios
-        .post("/es/my_index/_search", {
-          query: {
-            match: {
-              message: searchWord,
-            },
-          },
-        })
+        .post("/es/my_index/_search", option)
         .then((response) => {
           _this.searching = true;
           console.log(response);
@@ -107,6 +108,7 @@ export default {
             tmp.id = elem._id;
             tmp.title = elem._source.title;
             tmp.message = elem._source.message;
+            tmp.tags = elem._source.tags;
             result.push(tmp);
           }
           // メモを一旦全削除
