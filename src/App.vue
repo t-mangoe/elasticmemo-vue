@@ -5,7 +5,10 @@
         @search-event="search"
         @open-navigation-drawer-event="openNavigationDrawer"
       ></Header>
-      <NavigationDrawer ref="navigationDrawer"></NavigationDrawer>
+      <NavigationDrawer
+        @tag-narrow-event="filterByTag"
+        ref="navigationDrawer"
+      ></NavigationDrawer>
       <CardArea @pre-loader="PreLoaderShow = $event" ref="cardArea"></CardArea>
       <CreateMemoButton @update-event="update"></CreateMemoButton>
       <PreLoader :show="PreLoaderShow"></PreLoader>
@@ -38,10 +41,14 @@ export default {
       this.$refs.cardArea.getMemos();
     },
     search(searchWord) {
-      this.$refs.cardArea.search(searchWord);
+      this.$refs.cardArea.search({ searchWord });
     },
     openNavigationDrawer() {
       this.$refs.navigationDrawer.open();
+    },
+    filterByTag(tag) {
+      console.log(tag);
+      this.$refs.cardArea.search({ tagName: tag });
     },
   },
 
