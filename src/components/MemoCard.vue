@@ -62,7 +62,7 @@ export default {
     deleteMemo() {
       console.log("delete memo.");
       const url =
-        "http://192.168.11.50:9200/my_index/my_type/" + this.id + "?pretty";
+        "/es/my_index/my_type/" + this.id + "?pretty";
 
       axios
         .delete(url)
@@ -81,7 +81,7 @@ export default {
       const date = new Date();
       const dateStr = date.toISOString();
       const url =
-        "http://192.168.11.50:9200/my_index/my_type/" + this.id + "?pretty";
+        "/es/my_index/my_type/" + this.id + "?pretty";
       const title = this.title;
       const message = this.message;
 
