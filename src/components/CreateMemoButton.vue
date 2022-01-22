@@ -64,7 +64,7 @@ export default {
       const dateStr = date.toISOString();
 
       axios
-        .post("http://192.168.11.50:9200/my_index/my_type/?pretty", {
+        .post("/es/my_index/my_type/?pretty", {
           user_name: "user",
           date: dateStr,
           title: this.titleText,
