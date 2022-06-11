@@ -3,6 +3,15 @@
     <v-btn color="primary" dark @click.stop="openCreateMemoWindow">
       Create
     </v-btn>
+    <v-speed-dial v-model="speedDial" absolute bottom right direction="top" transition="scale-transition">
+      <template v-slot:activator>
+        <v-btn color="blue" dark>
+          <v-icon v-if="speedDial">mdi-close</v-icon>
+          <v-icon v-else>mdi-plus</v-icon>
+        </v-btn>
+      </template>
+
+    </v-speed-dial>
 
     <v-dialog v-model="dialog" max-width="75%">
       <v-card>
@@ -93,6 +102,7 @@ export default {
   data() {
     return {
       dialog: false,
+      speedDial: false,
       titleText: "",
       contentsText: "",
       tags: [],
