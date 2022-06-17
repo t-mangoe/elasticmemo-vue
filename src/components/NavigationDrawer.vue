@@ -22,18 +22,30 @@
           <v-icon>
             mdi-plus
           </v-icon>
-          タグを追加
+          タグを追加・編集
         </v-list-item>
       </v-list-group>
     </v-list>
 
-    <v-dialog v-model="dialog" max-width="75%">
+    <v-dialog v-model="dialog" max-width="50%">
       <v-card>
         <v-card-title class="headline">タグを追加</v-card-title>
         <v-container>
           <v-row>
             <v-col cols="12">
               <v-text-field label="タグ名" v-model="newTagText"></v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-row v-for="tag in tags" :key="tag">
+            <v-col md="auto">
+              <v-icon>mdi-delete</v-icon>
+            </v-col>
+            <v-col>
+              {{ tag }}
+            </v-col>
+            <v-col md="auto">
+              <v-icon>mdi-pencil</v-icon>
             </v-col>
           </v-row>
         </v-container>
