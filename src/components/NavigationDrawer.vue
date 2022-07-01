@@ -18,7 +18,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="dialog = true">
+        <v-list-item @click="openDialog">
           <v-icon>
             mdi-plus
           </v-icon>
@@ -38,14 +38,18 @@
           </v-row>
 
           <v-row v-for="tag in tags" :key="tag.id">
-            <v-col md="auto">
+            <v-col md="auto" align-content="center">
               <v-icon @click="deleteTag(tag)">mdi-delete</v-icon>
             </v-col>
-            <v-col>
-              {{ tag.name }}
+            <v-col class="pa-1">
+              <v-text-field
+                class="pt-0"
+                v-model="tag.editingText"
+              ></v-text-field>
+              <!-- {{ tag.name }} -->
             </v-col>
             <v-col md="auto">
-              <v-icon>mdi-pencil</v-icon>
+              <v-icon @click="editTag(tag)">mdi-pencil</v-icon>
             </v-col>
           </v-row>
         </v-container>
@@ -93,6 +97,13 @@ export default {
     close() {
       this.drawer = false;
     },
+    openDialog() {
+      this.dialog = true;
+      // タグ編集用の文字列を作成。原本(name)をコピーするだけ
+      this.tags.forEach((tag) => {
+        tag.editingText = tag.name;
+      });
+    },
     addTag() {
       const tagText = this.newTagText;
       axios
@@ -130,6 +141,9 @@ export default {
           console.error(error);
           confirm("タグの削除に失敗");
         });
+    },
+    editTag(tag) {
+      confirm("タグを編集します：" + tag.name);
     },
     getAndUpdateTags() {
       this.tags = [];
