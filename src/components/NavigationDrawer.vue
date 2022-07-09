@@ -100,9 +100,9 @@ export default {
     openDialog() {
       this.dialog = true;
       // タグ編集用の文字列を作成。原本(name)をコピーするだけ
-      this.tags.forEach((tag) => {
-        tag.editingText = tag.name;
-      });
+      // this.tags.forEach((tag) => {
+      //   tag.editingText = tag.name;
+      // });
     },
     addTag() {
       const tagText = this.newTagText;
@@ -143,7 +143,22 @@ export default {
         });
     },
     editTag(tag) {
-      confirm("タグを編集します：" + tag.name);
+      confirm("タグを編集します：" + tag.editingText);
+      axios
+        .post("es/tags/_update/" + tag.id, {
+          doc: {
+            tagName: tag.editingText,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          confirm("タグの編集に成功");
+          this.getAndUpdateTags();
+        })
+        .catch((error) => {
+          console.error(error);
+          confirm("タグの編集に失敗");
+        });
     },
     getAndUpdateTags() {
       this.tags = [];
@@ -156,6 +171,8 @@ export default {
           this.tags = tagData.map((data) => ({
             id: data._id,
             name: data._source.tagName,
+            // タグ編集用の文字列を作成。原本(name)をコピーするだけ
+            editingText: data._source.tagName,
           }));
         })
         .catch((error) => {
