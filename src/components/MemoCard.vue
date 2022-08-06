@@ -26,16 +26,15 @@
                 v-model="message"
               ></v-textarea>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-select
-              v-model="editingTags"
-              :items="items"
-              chips
-              label="Tags"
-              multiple
-              solo
-            ></v-select>
+            <v-col cols="12">
+              <v-select
+                v-model="editingTags"
+                :items="items"
+                chips
+                label="タグ"
+                multiple
+              ></v-select>
+            </v-col>
           </v-row>
         </v-container>
 
@@ -61,8 +60,7 @@ export default {
   methods: {
     deleteMemo() {
       console.log("delete memo.");
-      const url =
-        "/es/my_index/my_type/" + this.id + "?pretty";
+      const url = "/es/my_index/my_type/" + this.id + "?pretty";
 
       axios
         .delete(url)
@@ -80,8 +78,7 @@ export default {
       console.log("update memo.");
       const date = new Date();
       const dateStr = date.toISOString();
-      const url =
-        "/es/my_index/my_type/" + this.id + "?pretty";
+      const url = "/es/my_index/my_type/" + this.id + "?pretty";
       const title = this.title;
       const message = this.message;
 
@@ -91,9 +88,11 @@ export default {
           date: dateStr,
           title,
           message,
+          tags: this.editingTags,
         })
         .then((response) => {
           console.log(response);
+          this.tags = this.editingTags;
         })
         .catch((error) => {
           console.error(error);
