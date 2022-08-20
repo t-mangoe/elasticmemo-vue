@@ -1,16 +1,19 @@
 <template>
   <v-container>
-    <v-btn color="primary" dark @click.stop="openCreateMemoWindow">
-      Create
-    </v-btn>
-    <v-speed-dial v-model="speedDial" absolute bottom right direction="top" transition="scale-transition">
+    <v-speed-dial
+      v-model="speedDial"
+      absolute
+      bottom
+      right
+      direction="top"
+      transition="scale-transition"
+    >
       <template v-slot:activator>
-        <v-btn color="blue" dark>
+        <v-btn color="primary" fab dark @click.stop="openCreateMemoWindow">
           <v-icon v-if="speedDial">mdi-close</v-icon>
           <v-icon v-else>mdi-plus</v-icon>
         </v-btn>
       </template>
-
     </v-speed-dial>
 
     <v-dialog v-model="dialog" max-width="75%">
