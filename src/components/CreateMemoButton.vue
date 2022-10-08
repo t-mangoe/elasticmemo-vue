@@ -75,17 +75,31 @@ export default {
       const date = new Date();
       const dateStr = date.toISOString();
 
+      const title = this.titleText;
+      const message = this.contentsText;
+      const tags = this.tags;
+
       axios
         .post("/es/my_index/my_type/?pretty", {
           user_name: "user",
           date: dateStr,
-          title: this.titleText,
-          message: this.contentsText,
-          tags: this.tags,
+          title,
+          message,
+          tags,
         })
         .then((response) => {
           console.log(response);
-          this.$emit("update-event");
+          const id = response.data._id;
+
+          const memo = {
+            id,
+            title,
+            message,
+            tags,
+          };
+
+          // this.$emit("update-event");
+          this.$emit("create-event", memo);
         })
         .catch(function(error) {
           console.error("通信失敗！！");
