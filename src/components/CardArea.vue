@@ -47,6 +47,7 @@ export default {
     showPreLoader(flag) {
       this.$emit("pre-loader", flag);
     },
+
     getMemos() {
       const _this = this;
       console.log(this);
@@ -84,6 +85,11 @@ export default {
           _this.showPreLoader(false);
         });
     },
+
+    addMemo(memo) {
+      this.memos.push(memo);
+    },
+
     search({ searchWord = "", tagName = "" } = {}) {
       const _this = this;
       this.showPreLoader(true);
@@ -123,6 +129,7 @@ export default {
           _this.showPreLoader(false);
         });
     },
+
     resetSearch() {
       this.searching = false;
       this.getMemos();
