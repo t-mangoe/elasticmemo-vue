@@ -9,8 +9,8 @@
         @tag-narrow-event="filterByTag"
         ref="navigationDrawer"
       ></NavigationDrawer>
+      <CreateMemoButton @create-event="addMemoToCardArea"></CreateMemoButton>
       <CardArea @pre-loader="PreLoaderShow = $event" ref="cardArea"></CardArea>
-      <CreateMemoButton @update-event="update"></CreateMemoButton>
       <PreLoader :show="PreLoaderShow"></PreLoader>
     </div>
   </v-app>
@@ -49,6 +49,9 @@ export default {
     filterByTag(tag) {
       console.log(tag);
       this.$refs.cardArea.search({ tagName: tag });
+    },
+    addMemoToCardArea(memo) {
+      this.$refs.cardArea.addMemo(memo);
     },
   },
 
