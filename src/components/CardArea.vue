@@ -7,6 +7,7 @@
       :title="memo.title"
       :message="memo.message"
       :tags="memo.tags"
+      @delete-memo-event="deleteMemo"
     ></MemoCard>
     <ul v-for="(d, key) in datas" :key="key">
       <li>{{ d }}</li>
@@ -87,7 +88,12 @@ export default {
     },
 
     addMemo(memo) {
-      this.memos.push(memo);
+      this.memos.unshift(memo);
+    },
+
+    deleteMemo(id) {
+      console.log("ローカルのメモを削除します id = " + id);
+      this.memos = this.memos.filter((item) => item.id != id);
     },
 
     search({ searchWord = "", tagName = "" } = {}) {
