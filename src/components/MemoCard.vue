@@ -59,6 +59,7 @@ export default {
   name: "MemoCard",
   methods: {
     deleteMemo() {
+      const _this = this;
       console.log("delete memo.");
       const url = "/es/my_index/my_type/" + this.id + "?pretty";
 
@@ -66,6 +67,8 @@ export default {
         .delete(url)
         .then((response) => {
           console.log(response);
+
+          this.$emit("delete-memo-event", _this.id);
         })
         .catch(function(error) {
           console.error("通信失敗！！");
