@@ -144,6 +144,7 @@ export default {
     },
     editTag(tag) {
       confirm("タグを編集します：" + tag.editingText);
+      // const oldTagName = tag.name;
       axios
         .post("es/tags/_update/" + tag.id, {
           doc: {
@@ -154,6 +155,10 @@ export default {
           console.log(response);
           confirm("タグの編集に成功");
           this.getAndUpdateTags();
+          // TODO: メモに設定されているタグの情報について、更新処理をかける
+          // タグの管理は、ESでやるより、RDBを使ったほうが、情報が多くてやりやすいかな？
+          // TODO: 直接ESを参照しようとするより、APサーバを経由させたほうがいいと思う。タグの管理のためにも。
+          // this.updateTagInMemos(oldTagName, tag.editingText);
         })
         .catch((error) => {
           console.error(error);
@@ -179,6 +184,27 @@ export default {
           console.log("通信失敗！！");
           console.log(error);
         });
+    },
+
+    updateTagInMemos(oldTagName, newTagName) {
+      // メモに設定されているタグ情報を更新する
+      // うまく機能していません！！！将来的には廃止予定！
+      axios.post("es/my_index/_update_by_query", {
+        script: {
+          source:
+            "if (ctx._source.tags.contains(params.oldTag)) { ctx._source.tags.remove[ctx._source.tags.indexOf(params.oldTag)] = newTagName }",
+          lang: "painless",
+          params: {
+            oldTag: oldTagName,
+            newTag: newTagName,
+          },
+        },
+        query: {
+          term: {
+            tags: oldTagName,
+          },
+        },
+      });
     },
   },
 };
