@@ -1,9 +1,9 @@
-version: '3'
+version: "3"
 services:
   web:
     image: nginx:1.21.4
     ports:
-      - '80:80'
+      - "80:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
   vue:
@@ -12,9 +12,17 @@ services:
       dockerfile: "vue.dockerfile"
     command: "yarn run serve"
     ports:
-      - '8080:8080'
+      - "8080:8080"
     volumes:
-      - .:/app
+      - ./app:/app
+  express:
+    image: node:16.14-alpine
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./express:/express
+    working_dir: /express
+    command: npm start
   es:
     build:
       context: "."
