@@ -3,9 +3,18 @@ const axiosBase = require("axios");
 const axios = axiosBase.create({
   baseURL: "http://es:9200/",
 });
+const bodyParser = require("body-parser");
 
 // expressアプリを生成する
 const app = express();
+
+// body-parserの設定
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
 
 // 動作確認用の処理
 app.get("/", function (req, res) {
@@ -38,6 +47,24 @@ app.get("/get-memo", function (req, res) {
       res.status(500);
       res.send(error);
     });
+});
+
+// メモを検索する処理
+app.post("/search-memo", function (req, res) {
+  // TODO: POSTのリクエスト解析には、body-parserが必要みたい。
+  const option = req.body;
+  console.log("req = " + req);
+  console.log("option = " + option);
+  axios.post("/my_index/_search", option).then((response) => {
+    console.log("ElasticSearchからのデータ検索に成功しました");
+    console.log(response);
+    const data = response.data;
+    res.send(JSON.stringify(data));
+  });
+
+  // 処理作成中のため、ひとまず、エラーを返す。
+  // res.status(500);
+  // res.send(req.body);
 });
 
 // ポート3000でサーバを立てる
