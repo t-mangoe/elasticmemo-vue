@@ -53,7 +53,8 @@ export default {
       const _this = this;
       console.log(this);
       axios
-        .post("/es/my_index/_search", {
+        // .post("/es/my_index/_search", {
+        .get("/express/get-memo/", {
           sort: [
             {
               date: "desc",
@@ -108,8 +109,10 @@ export default {
         },
       };
       // 検索処理
+      // TODO: express経由でESのデータを取得できるようにする
       axios
-        .post("/es/my_index/_search", option)
+        // .post("/es/my_index/_search", option)
+        .post("/express/search-memo/", option)
         .then((response) => {
           _this.searching = true;
           console.log(response);
