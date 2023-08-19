@@ -67,5 +67,26 @@ app.post("/search-memo", function (req, res) {
   // res.send(req.body);
 });
 
+// メモを新規作成する処理
+app.post("/create-memo", function (req, res) {
+  const option = req.body;
+  console.log("req = " + req);
+  console.log("option = " + option);
+  axios
+    .post("/my_index/my_type/?pretty", option)
+    .then((response) => {
+      console.log("新規メモの作成に成功しました");
+      console.log(response);
+      const data = response.data;
+      res.send(JSON.stringify(data));
+    })
+    .catch(function (error) {
+      console.error("新規メモの作成に失敗！！");
+      console.error(error);
+      res.status(500);
+      res.send(error);
+    });
+});
+
 // ポート3000でサーバを立てる
 app.listen(3000, () => console.log("Listening on port 3000"));
