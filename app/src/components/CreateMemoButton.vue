@@ -80,7 +80,8 @@ export default {
       const tags = this.tags;
 
       axios
-        .post("/es/my_index/my_type/?pretty", {
+        // .post("/es/my_index/my_type/?pretty", {
+        .post("/express/create-memo", {
           user_name: "user",
           date: dateStr,
           title,
