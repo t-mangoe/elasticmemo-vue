@@ -55,12 +55,20 @@ app.post("/search-memo", function (req, res) {
   const option = req.body;
   console.log("req = " + req);
   console.log("option = " + option);
-  axios.post("/my_index/_search", option).then((response) => {
-    console.log("ElasticSearchからのデータ検索に成功しました");
-    console.log(response);
-    const data = response.data;
-    res.send(JSON.stringify(data));
-  });
+  axios
+    .post("/my_index/_search", option)
+    .then((response) => {
+      console.log("ElasticSearchからのデータ検索に成功しました");
+      console.log(response);
+      const data = response.data;
+      res.send(JSON.stringify(data));
+    })
+    .catch((error) => {
+      console.error("メモの検索に失敗！！");
+      console.error(error);
+      res.status(500);
+      res.send(error);
+    });
 
   // 処理作成中のため、ひとまず、エラーを返す。
   // res.status(500);
