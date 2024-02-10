@@ -101,11 +101,23 @@ export default {
       const _this = this;
       this.showPreLoader(true);
       const match = {};
-      if (searchWord !== "") match.message = searchWord;
-      if (tagName !== "") match.tags = tagName;
+      // タイトル部分も検索対象とするように拡張
+      const multi_match = {};
+      multi_match.fields = ["title", "message"];
+      const must_queries = [];
+      if (searchWord !== "") {
+        multi_match.query = searchWord;
+        must_queries.push({ multi_match });
+      }
+      if (tagName !== "") {
+        match.tags = tagName;
+        must_queries.push({ match });
+      }
       const option = {
         query: {
-          match,
+          bool: {
+            must: must_queries,
+          },
         },
       };
       // 検索処理
