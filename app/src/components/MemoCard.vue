@@ -81,18 +81,21 @@ export default {
       console.log("update memo.");
       const date = new Date();
       const dateStr = date.toISOString();
-      const url = "/es/my_index/my_type/" + this.id + "?pretty";
-      const title = this.title;
-      const message = this.message;
+      const url = "/express/update-memo/";
+      const updated_data = {
+        user_name: "user",
+        date: dateStr,
+        title: this.title,
+        message: this.message,
+        tags: this.editingTags,
+      };
+      const sendedData = {
+        id: this.id,
+        updated_data,
+      };
 
       axios
-        .put(url, {
-          user_name: "user",
-          date: dateStr,
-          title,
-          message,
-          tags: this.editingTags,
-        })
+        .put(url, sendedData)
         .then((response) => {
           console.log(response);
           this.tags = this.editingTags;
