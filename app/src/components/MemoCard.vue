@@ -61,10 +61,17 @@ export default {
     deleteMemo() {
       const _this = this;
       console.log("delete memo.");
-      const url = "/es/my_index/my_type/" + this.id + "?pretty";
+      // TODO: APサーバ経由での削除処理に変更する
+      // const url = "/es/my_index/my_type/" + this.id + "?pretty";
+      const url = "/express/delete-memo/";
+      const sendedData = {
+        id: _this.id,
+      };
 
       axios
-        .delete(url)
+        .delete(url, {
+          data: sendedData,
+        })
         .then((response) => {
           console.log(response);
 

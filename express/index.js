@@ -21,8 +21,6 @@ app.get("/", function (req, res) {
   res.send("ページが表示されました！");
 });
 
-// TODO: ElasticSearchとの通信処理を作成する
-
 axios.defaults.base;
 
 // メモを取得する処理
@@ -51,7 +49,6 @@ app.get("/get-memo", function (req, res) {
 
 // メモを検索する処理
 app.post("/search-memo", function (req, res) {
-  // TODO: POSTのリクエスト解析には、body-parserが必要みたい。
   const option = req.body;
   console.log("req = " + req);
   console.log("option = " + option);
@@ -69,10 +66,6 @@ app.post("/search-memo", function (req, res) {
       res.status(500);
       res.send(error);
     });
-
-  // 処理作成中のため、ひとまず、エラーを返す。
-  // res.status(500);
-  // res.send(req.body);
 });
 
 // メモを新規作成する処理
@@ -115,6 +108,30 @@ app.put("/update-memo", function (req, res) {
     })
     .catch((error) => {
       console.error("メモの更新に失敗！！");
+      console.error(error);
+      res.status(500);
+      res.send(error);
+    });
+});
+
+// メモを削除する処理
+app.delete("/delete-memo", function (req, res) {
+  const option = req.body;
+  console.log("req = " + req);
+  console.log("option = " + option);
+  const id = option.id;
+  const url = "/my_index/my_type/" + id + "?pretty";
+
+  axios
+    .delete(url)
+    .then((response) => {
+      console.log("メモの削除に成功しました");
+      console.log(response);
+      const data = response.data;
+      res.send(JSON.stringify(data));
+    })
+    .catch((error) => {
+      console.error("メモの削除に失敗！！");
       console.error(error);
       res.status(500);
       res.send(error);
