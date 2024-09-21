@@ -2,9 +2,20 @@ import axios from "axios";
 
 export default class {
   constructor() {
-    const _this = this;
     this.hoge = "hoge";
     this.tags = [];
+
+    this.updateTagInfo();
+  }
+
+  echo() {
+    console.log(this.hoge);
+    return 111;
+  }
+
+  updateTagInfo() {
+    // サーバからタグ情報を取得し、this.tags変数の状態を更新する
+    const _this = this;
 
     axios
       .post("es/tags/_search")
@@ -20,12 +31,7 @@ export default class {
       });
   }
 
-  echo() {
-    console.log(this.hoge);
-    return 111;
-  }
-
-  getAllTags(){
+  getAllTags() {
     return this.tags;
   }
 }

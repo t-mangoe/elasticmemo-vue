@@ -70,7 +70,7 @@
 
 <script>
 import axios from "axios";
-import TagAdministrator from "./TagAdministrator.js";
+// import TagAdministrator from "./TagAdministrator.js";
 
 export default {
   name: "NavigationDrawer",
@@ -84,8 +84,8 @@ export default {
     };
   },
   mounted() {
-    const tagAdmin = new TagAdministrator();
-    tagAdmin.echo();
+    // const tagAdmin = new TagAdministrator();
+    // tagAdmin.echo();
     // this.tagAdmin = TagAdministrator.hoge();
 
     this.getAndUpdateTags();
@@ -167,6 +167,8 @@ export default {
     },
     getAndUpdateTags() {
       this.tags = [];
+
+      // TODO: 以下でタグの検索をしているが、タグの情報はTagAdministratorに任せたほうがよい
       axios
         .post("es/tags/_search")
         .then((response) => {
@@ -179,6 +181,8 @@ export default {
             // タグ編集用の文字列を作成。原本(name)をコピーするだけ
             editingText: data._source.tagName,
           }));
+
+          this.$tagAdmin.updateTagInfo();
         })
         .catch((error) => {
           console.log("通信失敗！！");
