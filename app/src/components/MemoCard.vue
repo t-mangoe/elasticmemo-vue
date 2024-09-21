@@ -61,10 +61,17 @@ export default {
     deleteMemo() {
       const _this = this;
       console.log("delete memo.");
-      const url = "/es/my_index/my_type/" + this.id + "?pretty";
+      // TODO: APサーバ経由での削除処理に変更する
+      // const url = "/es/my_index/my_type/" + this.id + "?pretty";
+      const url = "/express/delete-memo/";
+      const sendedData = {
+        id: _this.id,
+      };
 
       axios
-        .delete(url)
+        .delete(url, {
+          data: sendedData,
+        })
         .then((response) => {
           console.log(response);
 
@@ -81,18 +88,21 @@ export default {
       console.log("update memo.");
       const date = new Date();
       const dateStr = date.toISOString();
-      const url = "/es/my_index/my_type/" + this.id + "?pretty";
-      const title = this.title;
-      const message = this.message;
+      const url = "/express/update-memo/";
+      const updated_data = {
+        user_name: "user",
+        date: dateStr,
+        title: this.title,
+        message: this.message,
+        tags: this.editingTags,
+      };
+      const sendedData = {
+        id: this.id,
+        updated_data,
+      };
 
       axios
-        .put(url, {
-          user_name: "user",
-          date: dateStr,
-          title,
-          message,
-          tags: this.editingTags,
-        })
+        .put(url, sendedData)
         .then((response) => {
           console.log(response);
           this.tags = this.editingTags;
