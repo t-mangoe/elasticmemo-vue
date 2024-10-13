@@ -165,29 +165,38 @@ export default {
           confirm("タグの編集に失敗");
         });
     },
-    getAndUpdateTags() {
+    async getAndUpdateTags() {
       this.tags = [];
 
       // TODO: 以下でタグの検索をしているが、タグの情報はTagAdministratorに任せたほうがよい
-      axios
-        .post("es/tags/_search")
-        .then((response) => {
-          console.log("通信成功！！");
-          console.log(response);
-          const tagData = response.data.hits.hits;
-          this.tags = tagData.map((data) => ({
-            id: data._id,
-            name: data._source.tagName,
-            // タグ編集用の文字列を作成。原本(name)をコピーするだけ
-            editingText: data._source.tagName,
-          }));
+      // axios
+      //   .post("es/tags/_search")
+      //   .then((response) => {
+      //     console.log("通信成功！！");
+      //     console.log(response);
+      //     const tagData = response.data.hits.hits;
+      //     this.tags = tagData.map((data) => ({
+      //       id: data._id,
+      //       name: data._source.tagName,
+      //       // タグ編集用の文字列を作成。原本(name)をコピーするだけ
+      //       editingText: data._source.tagName,
+      //     }));
 
-          this.$tagAdmin.updateTagInfo();
-        })
-        .catch((error) => {
-          console.log("通信失敗！！");
-          console.log(error);
-        });
+      //     this.$tagAdmin.updateTagInfo();
+      //   })
+      //   .catch((error) => {
+      //     console.log("通信失敗！！");
+      //     console.log(error);
+      //   });
+
+      await this.$tagAdmin.updateTagInfo().then(() => {
+        this.tags = this.$tagAdmin.getAllTagData().map((data) => ({
+          id: data.id,
+          name: data.name,
+          // タグ編集用の文字列を作成。原本(name)をコピーするだけ
+          editingText: data.name,
+        }));
+      });
     },
 
     updateTagInMemos(oldTagName, newTagName) {

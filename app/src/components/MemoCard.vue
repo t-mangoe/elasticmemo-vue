@@ -114,7 +114,7 @@ export default {
     },
     openEditWindow() {
       const tagAdmin = this.$tagAdmin;
-      this.items = tagAdmin.getAllTags();
+      this.items = tagAdmin.getAllTagName();
       this.editingTags = this.tags;
       this.dialog = true;
     },
