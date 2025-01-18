@@ -113,7 +113,7 @@ export default {
     },
     openCreateMemoWindow() {
       const tagAdmin = this.$tagAdmin;
-      this.items = tagAdmin.getAllTags();
+      this.items = tagAdmin.getAllTagName();
       this.dialog = true;
     },
   },
