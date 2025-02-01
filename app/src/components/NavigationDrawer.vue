@@ -130,8 +130,15 @@ export default {
     },
     deleteTag(tag) {
       confirm("タグを削除します。ID:" + tag.id);
+      const url = "/express/delete-tag/";
+      const sendedData = {
+        delete_tag_id: tag.id,
+      };
+
       axios
-        .delete("es/tags/tag_type/" + tag.id)
+        .delete(url, {
+          data: sendedData,
+        })
         .then((response) => {
           console.log(response);
           confirm("タグの削除に成功");

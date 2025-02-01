@@ -138,5 +138,32 @@ app.delete("/delete-memo", function (req, res) {
     });
 });
 
+// タグを削除する処理。メモからタグを外すのではなく、タグの存在を消す。
+app.delete("/delete-tag", function (req, res) {
+  const request_body = req.body;
+  console.log("req = " + req);
+  console.log("request_body = " + request_body);
+  const delete_tag_id = request_body.delete_tag_id;
+  const url = "/tags/tag_type/" + delete_tag_id;
+
+  axios
+    .delete(url)
+    .then((response) => {
+      console.log("タグの削除処理に成功");
+      console.log(response);
+
+      // TODO: 削除したタグがつけられたメモをESから取得する。取得したメモから、削除したタグを取り除く。
+
+      const data = response.data;
+      res.send(JSON.stringify(data));
+    })
+    .catch(function (error) {
+      console.error("タグを削除する通信に失敗！！");
+      console.error(error);
+      res.status(500);
+      res.send(error);
+    });
+});
+
 // ポート3000でサーバを立てる
 app.listen(3000, () => console.log("Listening on port 3000"));
