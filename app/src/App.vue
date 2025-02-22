@@ -7,6 +7,7 @@
       ></Header>
       <NavigationDrawer
         @tag-narrow-event="filterByTag"
+        @refresh-cardarea-event="update"
         ref="navigationDrawer"
       ></NavigationDrawer>
       <CreateMemoButton @create-event="addMemoToCardArea"></CreateMemoButton>

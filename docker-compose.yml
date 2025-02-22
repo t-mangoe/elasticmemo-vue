@@ -17,12 +17,17 @@ services:
       - ./app:/app
   express:
     image: node:16.14-alpine
+    expose:
+      # 9229番ポートは、デバッグ用
+      - "9229"
     ports:
       - "3000:3000"
+      - "9229:9229"
     volumes:
       - ./express:/express
     working_dir: /express
-    command: npm start
+    # command: npm start
+    command: npm run debug
   es:
     build:
       context: "."

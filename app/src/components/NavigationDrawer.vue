@@ -130,12 +130,21 @@ export default {
     },
     deleteTag(tag) {
       confirm("タグを削除します。ID:" + tag.id);
+      const url = "/express/delete-tag/";
+      const sendedData = {
+        delete_tag_id: tag.id,
+        delete_tag_name: tag.name,
+      };
+
       axios
-        .delete("es/tags/tag_type/" + tag.id)
+        .delete(url, {
+          data: sendedData,
+        })
         .then((response) => {
           console.log(response);
           confirm("タグの削除に成功");
           this.getAndUpdateTags();
+          this.refreshCardArea();
         })
         .catch((error) => {
           console.error(error);
@@ -197,6 +206,10 @@ export default {
           editingText: data.name,
         }));
       });
+    },
+    refreshCardArea() {
+      // App.vue経由でCardArea.vueに処理を移す
+      this.$emit("refresh-cardarea-event");
     },
 
     updateTagInMemos(oldTagName, newTagName) {
