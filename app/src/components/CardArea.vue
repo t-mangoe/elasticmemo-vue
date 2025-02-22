@@ -100,7 +100,7 @@ export default {
     search({ searchWord = "", tagName = "" } = {}) {
       const _this = this;
       this.showPreLoader(true);
-      const match = {};
+      const term = {};
       // タイトル部分も検索対象とするように拡張
       const multi_match = {};
       multi_match.fields = ["title", "message"];
@@ -110,8 +110,9 @@ export default {
         must_queries.push({ multi_match });
       }
       if (tagName !== "") {
-        match.tags = tagName;
-        must_queries.push({ match });
+        // タグは、keywordを使って完全一致の検索とする
+        term["tags.keyword"] = tagName;
+        must_queries.push({ term });
       }
       const option = {
         query: {
