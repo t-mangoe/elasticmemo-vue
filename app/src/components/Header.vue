@@ -6,19 +6,21 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn icon>
-      <v-icon>mdi-heart</v-icon>
-    </v-btn>
-
     <v-text-field
       hide-details
       single-line
+      clearable
+      prepend-inner-icon="mdi-magnify"
       v-model="searchWord"
       color="black"
+      label="検索ワード"
+      @keydown.enter="search"
+      @click:prepend-inner="search"
+      @click:clear="clearSearch"
     ></v-text-field>
-    <v-btn icon @click="search">
+    <!-- <v-btn icon @click="search">
       <v-icon>mdi-magnify</v-icon>
-    </v-btn>
+    </v-btn> -->
   </v-app-bar>
 </template>
 
@@ -32,8 +34,10 @@ export default {
   },
   methods: {
     search() {
-      // alert(this.searchWord);
       this.$emit("search-event", this.searchWord);
+    },
+    clearSearch() {
+      this.$emit("clear-search-event");
     },
     openSideNav() {
       this.$emit("open-navigation-drawer-event");
