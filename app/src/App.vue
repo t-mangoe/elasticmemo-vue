@@ -3,6 +3,7 @@
     <div id="app">
       <Header
         @search-event="search"
+        @clear-search-event="clearSearch"
         @open-navigation-drawer-event="openNavigationDrawer"
       ></Header>
       <NavigationDrawer
@@ -43,6 +44,9 @@ export default {
     },
     search(searchWord) {
       this.$refs.cardArea.search({ searchWord });
+    },
+    clearSearch() {
+      this.$refs.cardArea.resetSearch();
     },
     openNavigationDrawer() {
       this.$refs.navigationDrawer.open();
