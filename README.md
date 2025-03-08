@@ -1,24 +1,35 @@
 # elasticmemo-vue
 
-## Project setup
+ElasticMemo is a web application for managing memos using ElasticSearch.
+
+## Application setup
+
+Download application from GitHub.
+
 ```
-yarn install
+git clone https://github.com/t-mangoe/elasticmemo-vue.git
+cd elasticmemo-vue
 ```
 
-### Compiles and hot-reloads for development
+Install Node.js dependencies for the front-end(vue) and the back-end(express).
+
 ```
-yarn serve
+docker compose run --rm vue yarn install
+docker compose run --rm express yarn install
 ```
 
-### Compiles and minifies for production
+ElasticMemo runs in a Docker container environment. Use `Docker compose` to run it.
+
 ```
-yarn build
+docker compose up
 ```
 
-### Lints and fixes files
+Run the initialization script to create the sample memo data. This script communicates with the ElasticSearch container, so it must be executed while the container is running.
+
 ```
-yarn lint
+cd init_elasticsearch
+bash init.sh
+cd ..
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Access `localhost` or the IP address of the machine on which the application runs with a web browser.
