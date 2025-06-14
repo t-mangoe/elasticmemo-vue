@@ -29,16 +29,20 @@
 
     <v-dialog v-model="dialog" max-width="50%">
       <v-card>
-        <v-card-title class="headline">タグを追加</v-card-title>
+        <v-card-title>タグの新規作成</v-card-title>
         <v-container>
           <v-row>
-            <v-col cols="12">
+            <v-col class="pa-1" offset="1">
               <v-text-field label="タグ名" v-model="newTagText"></v-text-field>
+            </v-col>
+            <v-col md="1">
+              <v-icon @click="addTag">mdi-plus-circle</v-icon>
             </v-col>
           </v-row>
 
+          <v-card-subtitle>タグ一覧</v-card-subtitle>
           <v-row v-for="tag in tags" :key="tag.id">
-            <v-col md="auto" align-content="center">
+            <v-col md="1" align-content="center">
               <v-icon @click="deleteTag(tag)">mdi-delete</v-icon>
             </v-col>
             <v-col class="pa-1">
@@ -46,9 +50,8 @@
                 class="pt-0"
                 v-model="tag.editingText"
               ></v-text-field>
-              <!-- {{ tag.name }} -->
             </v-col>
-            <v-col md="auto">
+            <v-col md="1">
               <v-icon @click="editTag(tag)">mdi-pencil</v-icon>
             </v-col>
           </v-row>
@@ -57,11 +60,11 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" text @click="dialog = false">
-            Cancel
+            Close
           </v-btn>
-          <v-btn color="green darken-1" text @click="addTag">
+          <!-- <v-btn color="green darken-1" text @click="addTag">
             Create
-          </v-btn>
+          </v-btn> -->
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -120,7 +123,7 @@ export default {
           confirm("タグの追加に失敗。。");
         });
       this.newTagText = "";
-      this.dialog = false;
+      // this.dialog = false;
     },
     narrowTag(tag, event) {
       console.log(event);
