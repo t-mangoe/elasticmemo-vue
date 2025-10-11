@@ -1,17 +1,25 @@
 <template>
   <div id="card-area">
-    <MemoCard
-      v-for="(memo, key) in memos"
-      :id="memo.id"
-      :key="key"
-      :title="memo.title"
-      :message="memo.message"
-      :tags="memo.tags"
-      @delete-memo-event="deleteMemo"
-    ></MemoCard>
-    <ul v-for="(d, key) in datas" :key="key">
-      <li>{{ d }}</li>
-    </ul>
+    <v-container>
+      <div v-if="memos.length > 0">
+        <MemoCard
+          v-for="(memo, key) in memos"
+          :id="memo.id"
+          :key="key"
+          :title="memo.title"
+          :message="memo.message"
+          :tags="memo.tags"
+          @delete-memo-event="deleteMemo"
+        ></MemoCard>
+      </div>
+      <p v-else>表示するメモはありません</p>
+
+      <!-- <ul v-if="datas.length > 0">
+        <li v-for="(d, key) in datas" :key="key">{{ d }}</li>
+      </ul>
+      <p v-else>表示するメモはありません</p> -->
+    </v-container>
+
     <v-btn
       id="reset-btn"
       v-if="searching"
