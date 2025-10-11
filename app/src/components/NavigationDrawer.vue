@@ -127,7 +127,7 @@ export default {
     },
     narrowTag(tag, event) {
       console.log(event);
-      confirm("narrow tag: " + tag.name);
+      // confirm("narrow tag: " + tag.name);
       // 検索と同様に処理する。App.vue経由でCardArea.vueに処理を移す
       this.$emit("tag-narrow-event", tag.name);
     },
